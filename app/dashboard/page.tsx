@@ -1,22 +1,17 @@
- "use client"
-import { useSession } from "next-auth/react"
-import { NextResponse } from "next/server"
-import { Key } from "react"
-import dotenv from 'dotenv'
-dotenv.config
+ "use client" ;
+
+
+import Link from "next/link"
+import SpotifySearch from "../components/tracksearch";
 
 export default  function Dashboard (){
-              
-      const session = useSession()
-      
-    const clientid = process.env.CLIENT_ID;
-    console.log(clientid)
 
 
+   
       return <div>Dashboard
-
-            {session.status === "authenticated" ? 
-            "LogOut" : "Signin"}
+         <SpotifySearch/> 
+           <Link href={"http://localhost:3000/api/spotify/login"}>Login With Spotify</Link>
+            
       </div>
 
 }

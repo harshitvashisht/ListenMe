@@ -1,4 +1,3 @@
-// /app/api/spotify/login/route.ts
 import { NextResponse } from "next/server";
 import querystring from "querystring";
 
@@ -16,16 +15,18 @@ function generateRandomString(length: number) {
 
 export async function GET() {
   const state = generateRandomString(16);
-  const scope = "user-read-private user-read-email";
 
-  const url =
-    "https://accounts.spotify.com/authorize?" +
+  const scope = "user-read-private user-read-email user-library-read streaming";
+
+
+  const url = "https://accounts.spotify.com/authorize?" +
     querystring.stringify({
       response_type: "code",
       client_id,
-      scope,
       redirect_uri,
       state,
+      scope,
+      show_dialog: true,
     });
 
   return NextResponse.redirect(url);

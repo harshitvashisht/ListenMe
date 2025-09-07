@@ -3,7 +3,7 @@ import querystring from "querystring";
 
 const client_id = process.env.SPOTIFY_CLIENT_ID!;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET!;
-const redirect_uri = "http://127.0.0.1:3000/api/auth/spotify/callback";
+const redirect_uri = "http://127.0.0.1:3000/api/spotify/callback";
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
@@ -27,11 +27,15 @@ export async function GET(req: Request) {
     },
     body,
   });
+  
 
+  
   const data = await res.json();
+ 
+  
 
-  // Redirect to spotifyprofile with tokens
   return NextResponse.redirect(
-    `http://127.0.0.1:3000/spotifyprofile?access_token=${data.access_token}&refresh_token=${data.refresh_token}`
+    `http://127.0.0.1:3000/dashboard?access_token=${data.access_token}&refresh_token=${data.refresh_token}`
   );
+  
 }
